@@ -1,57 +1,54 @@
-# SupportFlow Builder
+# SupportFlow Visual Builder
 
-SupportFlow Builder is a visual editor for designing customer-support conversations. Teams can map questions, answers, and resolution messages on a canvas, then preview the customer experience before publishing.
+A React editor for designing, inspecting, and testing customer-support conversation flows.
 
-## Editor capabilities
+## What it does
 
-- Visual canvas with zoom and pan controls
-- Layer list for fast node navigation
-- Node inspector for editing questions, answers, and destinations
-- Customer-facing preview mode
-- Reachability checks for missing and unreachable paths
-- **Flow Contract Tests** for protecting important customer journeys
+- Renders the supplied `flow_data.json` as an interactive canvas.
+- Draws custom SVG connectors between positioned nodes.
+- Supports canvas pan/zoom, node selection, and in-memory editing.
+- Provides a customer-facing preview with answer traversal and restart.
+- Validates missing destinations and unreachable nodes.
 
-## Wildcard feature: Flow Contract Tests
+## Wildcard: Flow Contract Tests
 
-Flow Contract Tests let an editor save a named customer journey as a small behavioral contract: a starting node, an exact answer sequence, and an expected destination. Tests can be run individually or as a suite. A failing test reports the first broken step and focuses the affected node in the editor.
+Editors can save named customer journeys as behavioral contracts: a starting node, an exact answer sequence, and an expected destination. Contracts can be run individually or as a suite; failures identify the first broken step and focus the affected node.
 
-This brings regression testing to conversation design. It helps support teams change wording or routing safely, reduces manual QA before publishing, and protects high-value journeys such as billing, refunds, and account recovery. Tests are stored in the browser so content owners can build a reusable quality checklist without a backend.
+This adds regression testing to conversation design. Support teams can change routing or copy with confidence, protect high-value journeys, and reduce manual QA before publishing. Tests are stored locally in the browser and require no backend.
+
+## Tech and constraints
+
+- React + Vite
+- Plain CSS and custom React components
+- SVG connection rendering implemented in-house
+- No graph, flowchart, or component UI libraries
 
 ## Run locally
-
-Requirements: Node.js 18+ and npm.
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open the local URL printed by Vite. Production validation:
+Quality checks:
 
 ```bash
 npm run lint
 npm run build
 ```
 
-## Technology
-
-- React
-- Vite
-- Plain CSS
-- Provided `public/flow_data.json` data source
-
-No component framework or restricted UI library is used.
-
 ## Project structure
 
 ```text
 src/
-  components/   Editor UI, canvas, preview, and Contract Tests
-  hooks/        Flow loading and canvas interaction hooks
-  lib/          Flow calculations, contracts, and reducer
-public/         Seed flow data
+  components/  Canvas, editor panels, preview, and contract tests
+  hooks/       Flow loading and canvas interaction
+  lib/         Flow calculations, reducer, and contract execution
+public/
+  flow_data.json
 ```
 
-## Design
+## Links
 
-Design file: add the public Figma or Penpot link here before submission.
+- Live demo: (https://amalitech-jsfullstack-dev.vercel.app/)
+- Design system:https://www.figma.com/design/dNgWNDv62djeoPMlvNXoLg/Customer-Support-flow-system?node-id=0-1&t=K5GKDrFUJNLwtdra-1
