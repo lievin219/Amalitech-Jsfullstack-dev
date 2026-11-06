@@ -1,16 +1,57 @@
-# React + Vite
+# SupportFlow Builder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+SupportFlow Builder is a visual editor for designing customer-support conversations. Teams can map questions, answers, and resolution messages on a canvas, then preview the customer experience before publishing.
 
-Currently, two official plugins are available:
+## Editor capabilities
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Visual canvas with zoom and pan controls
+- Layer list for fast node navigation
+- Node inspector for editing questions, answers, and destinations
+- Customer-facing preview mode
+- Reachability checks for missing and unreachable paths
+- **Flow Contract Tests** for protecting important customer journeys
 
-## React Compiler
+## Wildcard feature: Flow Contract Tests
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Flow Contract Tests let an editor save a named customer journey as a small behavioral contract: a starting node, an exact answer sequence, and an expected destination. Tests can be run individually or as a suite. A failing test reports the first broken step and focuses the affected node in the editor.
 
-## Expanding the ESLint configuration
+This brings regression testing to conversation design. It helps support teams change wording or routing safely, reduces manual QA before publishing, and protects high-value journeys such as billing, refunds, and account recovery. Tests are stored in the browser so content owners can build a reusable quality checklist without a backend.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Run locally
+
+Requirements: Node.js 18+ and npm.
+
+```bash
+npm install
+npm run dev
+```
+
+Open the local URL printed by Vite. Production validation:
+
+```bash
+npm run lint
+npm run build
+```
+
+## Technology
+
+- React
+- Vite
+- Plain CSS
+- Provided `public/flow_data.json` data source
+
+No component framework or restricted UI library is used.
+
+## Project structure
+
+```text
+src/
+  components/   Editor UI, canvas, preview, and Contract Tests
+  hooks/        Flow loading and canvas interaction hooks
+  lib/          Flow calculations, contracts, and reducer
+public/         Seed flow data
+```
+
+## Design
+
+Design file: add the public Figma or Penpot link here before submission.

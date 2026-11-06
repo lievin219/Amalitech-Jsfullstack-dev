@@ -6,11 +6,13 @@ import { Header } from "./components/Header";
 import { Inspector } from "./components/Inspector";
 import { Preview } from "./components/Preview";
 import { Sidebar } from "./components/Sidebar";
+import { ContractTests } from "./components/ContractTests";
 
 export default function App() {
   const { flow, dispatch, error } = useFlow();
   const [pickedId, setPickedId] = useState(null);
   const [previewing, setPreviewing] = useState(false);
+  const [testsOpen, setTestsOpen] = useState(false);
 
   const issues = useMemo(() => (flow ? getFlowIssues(flow.nodes) : []), [flow]);
 
@@ -28,13 +30,20 @@ export default function App() {
 
   return (
     <main className="app">
-      <Header issues={issues} onPreview={() => setPreviewing(true)} />
+      <Header issues={issues} onPreview={() => setPreviewing(true)} onTests={() => setTestsOpen(true)} />
       <div className="body">
         <Sidebar nodes={flow.nodes} selectedId={selectedId} onSelect={setPickedId} onAdd={addNode} />
         <FlowCanvas flow={flow} selectedId={selectedId} onSelect={setPickedId} />
         <Inspector nodes={flow.nodes} node={selectedNode} dispatch={dispatch} />
       </div>
       {previewing && <Preview nodes={flow.nodes} onClose={() => setPreviewing(false)} />}
+      {testsOpen && (
+        <ContractTests
+          nodes={flow.nodes}
+          onSelect={setPickedId}
+          onClose={() => setTestsOpen(false)}
+        />
+      )}
     </main>
   );
 }
